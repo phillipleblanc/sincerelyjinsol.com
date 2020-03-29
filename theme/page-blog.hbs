@@ -1,0 +1,21 @@
+{{!< default}}
+
+{{#if @site.description}}
+<header class="page-head">
+    <img src="{{@site.logo}}" alt="{{@site.title}}" />
+    <h2 class="page-head-title">{{@site.description}}</h2>
+</header>
+{{/if}}
+
+{{#get "posts" include="tags" limit="all" filter="tags:-homepage"}}
+    <div class="post-wrapper">
+        <div class="post-feed">
+            {{#foreach posts}}
+
+                {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
+                {{> "post-card"}}
+
+            {{/foreach}}
+        </div>
+    </div>
+{{/get}}
