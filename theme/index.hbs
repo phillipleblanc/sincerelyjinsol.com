@@ -11,16 +11,18 @@ into the {body} of the default.hbs template --}}
     {{/if}}
 {{/is}}
 
-<div class="post-wrapper">
-    <div class="post-feed">
-        {{#foreach posts}}
+{{#get "posts" include="tags" limit="all" filter="tags:homepage"}}
+    <div class="post-wrapper">
+        <div class="post-feed">
+            {{#foreach posts}}
 
-            {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
-            {{> "post-card"}}
+                {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
+                {{> "post-card"}}
 
-        {{/foreach}}
+            {{/foreach}}
+        </div>
     </div>
-</div>
+{{/get}}
 
 <div class="footer-connect">
     <h2>Let's Connect</h2>
