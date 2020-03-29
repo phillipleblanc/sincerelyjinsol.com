@@ -425,6 +425,12 @@ body {
 /* Post Feed
 /* ---------------------------------------------------------- */
 
+.post-wrapper {
+    display: block;
+    width: 80%;
+    margin: auto;
+}
+
 .post-feed {
     display: flex;
     flex-wrap: wrap;
@@ -446,6 +452,10 @@ body {
     .post-card {
         flex: 1 1 100%;
         height: 70vw;
+    }
+
+    .post-wrapper {
+        width: 100%;
     }
 }
 
