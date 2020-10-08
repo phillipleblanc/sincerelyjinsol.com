@@ -1,0 +1,9 @@
+.jinsol-post-image {
+  width: 400px;
+  margin: auto;
+  display: block;
+}
+
+.post-content-body > h2 {
+  text-align: center;
+}

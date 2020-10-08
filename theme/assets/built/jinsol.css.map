@@ -1,0 +1,1 @@
+{"version":3,"sources":["jinsol.css"],"names":[],"mappings":"AAAA,mBACE,WAAY,CACZ,WAAY,CACZ,aACF,CAEA,sBACE,iBACF","file":"jinsol.css","sourcesContent":[".jinsol-post-image {\n  width: 400px;\n  margin: auto;\n  display: block;\n}\n\n.post-content-body > h2 {\n  text-align: center;\n}"]}
