@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sincerely Jinsol</title>
+    <meta name="description" content="Sincerely Jinsol — about, food, mindfulness, love, lifestyle and travel." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23131313'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='40' fill='%23f8f8f8' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+    <style>
+        /* === Sincerely Jinsol — revived from the Ghost "London" theme ======
+           Same layout, colors and feel as sincerelyjinsol.com (2020–2023),
+           rebuilt as a single static file.                                  */
+
+        :root {
+            --color-primary: #3eb0ef;
+            --color-base: #131313;
+            --color-border: #ddd;
+            --color-bg: #f8f8f8;
+            --font-sans-serif: 'Mulish', 'Muli', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-normal: 400;
+            --font-bold: 700;
+            --font-heavy: 800;
+        }
+
+        html { font-size: 62.5%; }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: var(--font-sans-serif);
+            font-size: 1.6rem;
+            line-height: 1.6em;
+            color: var(--color-base);
+            background: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--color-base); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        ::selection { background: rgba(62,176,239,.6); }
+
+        .site-wrapper { padding: 3vw; min-height: 100vh; }
+        @media (max-width: 850px) { .site-wrapper { padding: 6vw; } }
+
+        /* --- Site head ---------------------------------------------------- */
+        .site-head {
+            position: relative; z-index: 300; margin-top: -10px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 0;
+        }
+        .site-head-center { display: flex; justify-content: center; width: 100%; }
+        .site-head-logo {
+            display: block; padding: 10px;
+            font-size: 2.1rem; line-height: 1em; font-weight: var(--font-bold);
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .site-head-logo:hover { text-decoration: none; }
+        .head-spacer { width: 120px; flex-shrink: 0; }
+        @media (max-width: 700px) { .head-spacer { width: auto; } }
+
+        .social-links { display: flex; align-items: center; }
+        .social-links-link {
+            display: inline-block; position: relative;
+            width: 18px; height: 18px; overflow: hidden; cursor: pointer;
+            text-decoration: none; transform: scale(2); margin: 5px;
+        }
+        .social-links-link:hover { text-decoration: none; }
+        .SocialLinks-link-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .SocialLinks-link-icon { fill: #222; transition: fill 170ms ease-in-out; }
+        .social-links-link:hover .SocialLinks-link-icon { fill: var(--color-primary); }
+
+        /* --- Page head ---------------------------------------------------- */
+        .page-head {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 13vw 0; max-width: 70%; margin: auto; text-align: center;
+        }
+        .page-head-wordmark {
+            font-family: Georgia, "Times New Roman", serif;
+            font-style: italic; font-size: 6rem; line-height: 1.1em; margin: 0 0 1rem;
+            letter-spacing: -1px;
+        }
+        .page-head-title { margin: 0; font-size: 2rem; font-weight: var(--font-normal); color: var(--color-base); opacity: .7; }
+        @media (max-width: 500px) {
+            .page-head-wordmark { font-size: 4rem; }
+            .page-head-title { font-size: 1.8rem; }
+        }
+
+        /* --- Post feed (image cards) --------------------------------------- */
+        .post-wrapper { display: block; width: 80%; margin: auto; }
+        .post-feed { display: flex; flex-wrap: wrap; counter-reset: posts; }
+
+        .post-card {
+            position: relative; flex: 1 1 50%; display: flex;
+            height: 35vw;
+            background: linear-gradient(135deg, #1f1f1f 0%, #111 100%) center center;
+            background-size: cover; overflow: hidden;
+            counter-increment: posts;
+        }
+        @media (max-width: 700px) {
+            .post-card { flex: 1 1 100%; height: 70vw; }
+            .post-wrapper { width: 100%; }
+        }
+
+        .post-card-link { flex: 1 1 auto; display: block; position: absolute; inset: 0; z-index: 5; }
+        .post-card-link:hover { text-decoration: none; }
+
+        .post-card-content {
+            flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
+            position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+            color: #fff; background: rgba(0,0,0,0.1);
+            opacity: 0; transition: opacity .5s cubic-bezier(.33,0,.2,1);
+            pointer-events: none;
+        }
+        .post-card:hover .post-card-content { opacity: 1; transition: opacity .3s cubic-bezier(.33,0,.2,1); }
+
+        .post-card-title {
+            margin: 0; display: inline-block; font-size: 3.4rem; max-width: 70%;
+            text-align: center; transition: all .3s cubic-bezier(.33,0,.2,1);
+        }
+
+        /* Cards whose photo is missing fall back to the London "no-image"
+           style: giant watermark numeral + left-aligned title. */
+        .post-card:not(.has-image) .post-card-content {
+            opacity: 1; justify-content: flex-start; align-items: flex-start; padding: 4vw;
+        }
+        .post-card:not(.has-image)::before {
+            display: block; content: counter(posts);
+            position: absolute; bottom: -0.15em; right: 5vw;
+            font-size: 28vw; line-height: 1em; font-weight: var(--font-heavy);
+            letter-spacing: -0.1em; color: rgba(0,0,0,0.2); z-index: 1;
+        }
+        .post-card:not(.has-image) .post-card-title {
+            font-size: 5rem; line-height: 1.15em; text-align: left;
+        }
+        .post-card:not(.has-image):hover .post-card-title { text-decoration: underline; }
+        @media (max-width: 1200px) {
+            .post-card:not(.has-image) .post-card-title { font-size: 3.4rem; }
+        }
+        @media (max-width: 700px) {
+            .post-card:not(.has-image)::before { font-size: 50vw; }
+            .post-card.has-image .post-card-content { opacity: 1; }
+        }
+
+        /* --- Sections ------------------------------------------------------- */
+        .post-content { max-width: 720px; margin: 0 auto; padding: 6vw 0 2vw; scroll-margin-top: 8vh; }
+        .post-content h2 { text-align: center; font-size: 3.4rem; margin: 0 0 1.5rem; }
+        .post-content p { font-size: 1.7rem; line-height: 1.7em; }
+
+        /* --- Footer --------------------------------------------------------- */
+        .footer-connect { text-align: center; margin-top: 8vw; }
+        .footer-connect h2 { margin: 0 0 2rem; font-size: 2.4rem; }
+        .footer-connect .social-links { justify-content: center; display: flex; margin-bottom: 2rem; }
+        .site-foot {
+            margin: 3vw 0 1vw; text-align: center;
+            color: #a5a5a5; font-size: 1.4rem;
+        }
+    </style>
+</head>
+<body>
+<div class="site-wrapper">
+
+    <header class="site-head">
+        <div class="head-spacer"></div>
+        <div class="site-head-center">
+            <a class="site-head-logo" href="#top">Sincerely Jinsol</a>
+        </div>
+        <div class="site-head-right">
+            <div class="social-links">
+                <a href="mailto:jinsol.yuk@outlook.com" title="Email" class="social-links-link">
+                    <svg class="SocialLinks-link-svg" viewBox="0 0 64 64"><path class="SocialLinks-link-icon" d="M17,22v20h30V22H17z M41.1,25L32,32.1L22.9,25H41.1z M20,39V26.6l12,9.3l12-9.3V39H20z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/sincerelyjinsol/" title="Instagram" class="social-links-link" target="_blank" rel="noopener">
+                    <svg class="SocialLinks-link-svg" viewBox="0 0 64 64"><path class="SocialLinks-link-icon" d="M46.91,25.816c-0.073-1.597-0.326-2.687-0.697-3.641c-0.383-0.986-0.896-1.823-1.73-2.657c-0.834-0.834-1.67-1.347-2.657-1.73c-0.954-0.371-2.045-0.624-3.641-0.697C36.585,17.017,36.074,17,32,17s-4.585,0.017-6.184,0.09c-1.597,0.073-2.687,0.326-3.641,0.697c-0.986,0.383-1.823,0.896-2.657,1.73c-0.834,0.834-1.347,1.67-1.73,2.657c-0.371,0.954-0.624,2.045-0.697,3.641C17.017,27.415,17,27.926,17,32c0,4.074,0.017,4.585,0.09,6.184c0.073,1.597,0.326,2.687,0.697,3.641c0.383,0.986,0.896,1.823,1.73,2.657c0.834,0.834,1.67,1.347,2.657,1.73c0.954,0.371,2.045,0.624,3.641,0.697C27.415,46.983,27.926,47,32,47s4.585-0.017,6.184-0.09c1.597-0.073,2.687-0.326,3.641-0.697c0.986-0.383,1.823-0.896,2.657-1.73c0.834-0.834,1.347-1.67,1.73-2.657c0.371-0.954,0.624-2.045,0.697-3.641C46.983,36.585,47,36.074,47,32S46.983,27.415,46.91,25.816z M44.21,38.061c-0.067,1.462-0.311,2.257-0.516,2.785c-0.272,0.7-0.597,1.2-1.122,1.725c-0.525,0.525-1.025,0.85-1.725,1.122c-0.529,0.205-1.323,0.45-2.785,0.516c-1.581,0.072-2.056,0.087-6.061,0.087s-4.48-0.015-6.061-0.087c-1.462-0.067-2.257-0.311-2.785-0.516c-0.7-0.272-1.2-0.597-1.725-1.122c-0.525-0.525-0.85-1.025-1.122-1.725c-0.205-0.529-0.45-1.323-0.516-2.785c-0.072-1.582-0.087-2.056-0.087-6.061s0.015-4.48,0.087-6.061c0.067-1.462,0.311-2.257,0.516-2.785c0.272-0.7,0.597-1.2,1.122-1.725c0.525-0.525,1.025-0.85,1.725-1.122c0.529-0.205,1.323-0.45,2.785-0.516c1.582-0.072,2.056-0.087,6.061-0.087s4.48,0.015,6.061,0.087c1.462,0.067,2.257,0.311,2.785,0.516c0.7,0.272,1.2,0.597,1.725,1.122c0.525,0.525,0.85,1.025,1.122,1.725c0.529,0.205,0.45,1.323,0.516,2.785c0.072,1.582,0.087,2.056,0.087,6.061S44.282,36.48,44.21,38.061z M32,24.297c-4.254,0-7.703,3.449-7.703,7.703c0,4.254,3.449,7.703,7.703,7.703c4.254,0,7.703-3.449,7.703-7.703C39.703,27.746,36.254,24.297,32,24.297z M32,37c-2.761,0-5-2.239-5-5c0-2.761,2.239-5,5-5s5,2.239,5,5C37,34.761,34.761,37,32,37z M40.007,22.193c-0.994,0-1.8,0.806-1.8,1.8c0,0.994,0.806,1.8,1.8,1.8c0.994,0,1.8-0.806,1.8-1.8C41.807,22.999,41.001,22.193,40.007,22.193z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/jinsol-y-46483b17a/" title="LinkedIn" class="social-links-link" target="_blank" rel="noopener">
+                    <svg class="SocialLinks-link-svg" viewBox="0 0 64 64"><path class="SocialLinks-link-icon" d="M20.4,44h5.4V26.6h-5.4V44z M23.1,18c-1.7,0-3.1,1.4-3.1,3.1c0,1.7,1.4,3.1,3.1,3.1 c1.7,0,3.1-1.4,3.1-3.1C26.2,19.4,24.8,18,23.1,18z M39.5,26.2c-2.6,0-4.4,1.4-5.1,2.8h-0.1v-2.4h-5.2V44h5.4v-8.6 c0-2.3,0.4-4.5,3.2-4.5c2.8,0,2.8,2.6,2.8,4.6V44H46v-9.5C46,29.8,45,26.2,39.5,26.2z"/></svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="site-main" class="site-main">
+        <a id="top"></a>
+
+        <header class="page-head">
+            <p class="page-head-wordmark">Sincerely Jinsol</p>
+            <h2 class="page-head-title">about &middot; eat &middot; play &middot; love &middot; live</h2>
+        </header>
+
+        <div class="post-wrapper">
+            <div class="post-feed">
+
+                <article class="post-card" data-image="assets/about.jpg">
+                    <a class="post-card-link" href="#about" aria-label="About"></a>
+                    <div class="post-card-content"><h2 class="post-card-title">About</h2></div>
+                </article>
+
+                <article class="post-card" data-image="assets/eat.jpg">
+                    <a class="post-card-link" href="#eat" aria-label="Eat"></a>
+                    <div class="post-card-content"><h2 class="post-card-title">Eat</h2></div>
+                </article>
+
+                <article class="post-card" data-image="assets/play.jpg">
+                    <a class="post-card-link" href="#play" aria-label="Play"></a>
+                    <div class="post-card-content"><h2 class="post-card-title">Play</h2></div>
+                </article>
+
+                <article class="post-card" data-image="assets/mindfulness.jpg">
+                    <a class="post-card-link" href="#mindfulness" aria-label="&amp;"></a>
+                    <div class="post-card-content"><h2 class="post-card-title">&amp;</h2></div>
+                </article>
+
+                <article class="post-card" data-image="assets/love.jpg">
+                    <a class="post-card-link" href="#love" aria-label="Love"></a>
+                    <div class="post-card-content"><h2 class="post-card-title">Love</h2></div>
+                </article>
+
+                <article class="post-card" data-image="assets/lifestyle.jpg">
+                    <a class="post-card-link" href="#lifestyle" aria-label="Lifestyle"></a>
+                    <div class="post-card-content"><h2 class="post-card-title">Lifestyle</h2></div>
+                </article>
+
+                <article class="post-card" data-image="assets/travel.jpg">
+                    <a class="post-card-link" href="#travel" aria-label="Travel"></a>
+                    <div class="post-card-content"><h2 class="post-card-title">Travel</h2></div>
+                </article>
+
+            </div>
+        </div>
+
+        <!-- ══ Content below is placeholder — Jinsol, rewrite it in your own words. ══ -->
+
+        <section id="about" class="post-content">
+            <h2>About</h2>
+            <p>
+                <!-- Replace with your real introduction. -->
+                Hi, I'm Jinsol. This little corner of the internet is where I collect the
+                things I love — good food, quiet mornings, the people who make life warm.
+            </p>
+        </section>
+
+        <section id="eat" class="post-content">
+            <h2>Eat</h2>
+            <p>
+                Bagels, coffee, and the occasional 4B discovery. If it's delicious and
+                beautifully plated, it probably ends up here.
+            </p>
+        </section>
+
+        <section id="play" class="post-content">
+            <h2>Play</h2>
+            <p>
+                The playful side of things — because life deserves a sense of humor.
+            </p>
+        </section>
+
+        <section id="mindfulness" class="post-content">
+            <h2>&amp;</h2>
+            <p>
+                Mindfulness, slowly becoming. Pausing, breathing, noticing.
+            </p>
+        </section>
+
+        <section id="love" class="post-content">
+            <h2>Love</h2>
+            <p>
+                Saranghae. A love story, one ordinary day at a time.
+            </p>
+        </section>
+
+        <section id="lifestyle" class="post-content">
+            <h2>Lifestyle</h2>
+            <p>
+                Hiking, yoga, and a healthy lifestyle — small habits, repeated.
+            </p>
+        </section>
+
+        <section id="travel" class="post-content">
+            <h2>Travel</h2>
+            <p>
+                From France to everywhere next. Postcards from my journeys.
+            </p>
+        </section>
+
+        <div class="footer-connect">
+            <h2>Let's Connect!</h2>
+            <div class="social-links">
+                <a href="mailto:jinsol.yuk@outlook.com" title="Email" class="social-links-link">
+                    <svg class="SocialLinks-link-svg" viewBox="0 0 64 64"><path class="SocialLinks-link-icon" d="M17,22v20h30V22H17z M41.1,25L32,32.1L22.9,25H41.1z M20,39V26.6l12,9.3l12-9.3V39H20z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/sincerelyjinsol/" title="Instagram" class="social-links-link" target="_blank" rel="noopener">
+                    <svg class="SocialLinks-link-svg" viewBox="0 0 64 64"><path class="SocialLinks-link-icon" d="M46.91,25.816c-0.073-1.597-0.326-2.687-0.697-3.641c-0.383-0.986-0.896-1.823-1.73-2.657c-0.834-0.834-1.67-1.347-2.657-1.73c-0.954-0.371-2.045-0.624-3.641-0.697C36.585,17.017,36.074,17,32,17s-4.585,0.017-6.184,0.09c-1.597,0.073-2.687,0.326-3.641,0.697c-0.986,0.383-1.823,0.896-2.657,1.73c-0.834,0.834-1.347,1.67-1.73,2.657c-0.371,0.954-0.624,2.045-0.697,3.641C17.017,27.415,17,27.926,17,32c0,4.074,0.017,4.585,0.09,6.184c0.073,1.597,0.326,2.687,0.697,3.641c0.383,0.986,0.896,1.823,1.73,2.657c0.834,0.834,1.67,1.347,2.657,1.73c0.954,0.371,2.045,0.624,3.641,0.697C27.415,46.983,27.926,47,32,47s4.585-0.017,6.184-0.09c1.597-0.073,2.687-0.326,3.641-0.697c0.986-0.383,1.823-0.896,2.657-1.73c0.834-0.834,1.347-1.67,1.73-2.657c0.371-0.954,0.624-2.045,0.697-3.641C46.983,36.585,47,36.074,47,32S46.983,27.415,46.91,25.816z M44.21,38.061c-0.067,1.462-0.311,2.257-0.516,2.785c-0.272,0.7-0.597,1.2-1.122,1.725c-0.525,0.525-1.025,0.85-1.725,1.122c-0.529,0.205-1.323,0.45-2.785,0.516c-1.581,0.072-2.056,0.087-6.061,0.087s-4.48-0.015-6.061-0.087c-1.462-0.067-2.257-0.311-2.785-0.516c-0.7-0.272-1.2-0.597-1.725-1.122c-0.525-0.525-0.85-1.025-1.122-1.725c-0.205-0.529-0.45-1.323-0.516-2.785c-0.072-1.582-0.087-2.056-0.087-6.061s0.015-4.48,0.087-6.061c0.067-1.462,0.311-2.257,0.516-2.785c0.272-0.7,0.597-1.2,1.122-1.725c0.525-0.525,1.025-0.85,1.725-1.122c0.529-0.205,1.323-0.45,2.785-0.516c1.582-0.072,2.056-0.087,6.061-0.087s4.48,0.015,6.061,0.087c1.462,0.067,2.257,0.311,2.785,0.516c0.7,0.272,1.2,0.597,1.725,1.122c0.525,0.525,0.85,1.025,1.122,1.725c0.529,0.205,0.45,1.323,0.516,2.785c0.072,1.582,0.087,2.056,0.087,6.061S44.282,36.48,44.21,38.061z M32,24.297c-4.254,0-7.703,3.449-7.703,7.703c0,4.254,3.449,7.703,7.703,7.703c4.254,0,7.703-3.449,7.703-7.703C39.703,27.746,36.254,24.297,32,24.297z M32,37c-2.761,0-5-2.239-5-5c0-2.761,2.239-5,5-5s5,2.239,5,5C37,34.761,34.761,37,32,37z M40.007,22.193c-0.994,0-1.8,0.806-1.8,1.8c0,0.994,0.806,1.8,1.8,1.8c0.994,0,1.8-0.806,1.8-1.8C41.807,22.999,41.001,22.193,40.007,22.193z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/jinsol-y-46483b17a/" title="LinkedIn" class="social-links-link" target="_blank" rel="noopener">
+                    <svg class="SocialLinks-link-svg" viewBox="0 0 64 64"><path class="SocialLinks-link-icon" d="M20.4,44h5.4V26.6h-5.4V44z M23.1,18c-1.7,0-3.1,1.4-3.1,3.1c0,1.7,1.4,3.1,3.1,3.1 c1.7,0,3.1-1.4,3.1-3.1C26.2,19.4,24.8,18,23.1,18z M39.5,26.2c-2.6,0-4.4,1.4-5.1,2.8h-0.1v-2.4h-5.2V44h5.4v-8.6 c0-2.3,0.4-4.5,3.2-4.5c2.8,0,2.8,2.6,2.8,4.6V44H46v-9.5C46,29.8,45,26.2,39.5,26.2z"/></svg>
+                </a>
+            </div>
+            <p class="site-foot">Sincerely Jinsol &middot; Jinsol Yuk</p>
+        </div>
+    </main>
+</div>
+
+<script>
+    // Smooth-scroll for the card grid, and photo detection: if a card's photo
+    // is present it gets the hover-to-reveal "with-image" treatment; missing
+    // photos fall back to the theme's classic numeral card automatically.
+    document.documentElement.style.scrollBehavior = 'smooth';
+    document.querySelectorAll('.post-card[data-image]').forEach(function (card) {
+        var src = card.getAttribute('data-image');
+        var img = new Image();
+        img.onload = function () {
+            card.classList.add('has-image');
+            card.style.backgroundImage = 'url("' + src + '")';
+        };
+        img.src = src;
+    });
+</script>
+</body>
+</html>
